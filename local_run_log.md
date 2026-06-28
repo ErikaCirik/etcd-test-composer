@@ -142,3 +142,15 @@ docker compose down
 - The `ANTITHESIS_SDK_LOCAL_OUTPUT` environment variable must point to a **file path** (not a directory) for the SDK to write assertion output.
 - The Antithesis SDK's random module falls back to Python's `random.getrandbits(64)` when running outside the Antithesis platform, so `helper.py` functions work locally without modification.
 - The watch driver produces a harmless "Channel closed" error from the etcd3 library's internal watcher thread when the client connection is closed after the test completes. This does not affect test results.
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| "No such container: client" | Run `docker compose up -d` again |
+| "cluster is not healthy" | Wait longer: `sleep 20` then check `docker logs client` again |
+| "No such file" for the driver | Rebuild: go back to step 1 and `docker build` again |
+| Watch test shows 0 events | This can happen occasionally — run it again |
+| Any other error | `docker compose down` then start from step 1 |
