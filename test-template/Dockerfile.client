@@ -53,6 +53,14 @@ COPY ./python-generate-traffic/parallel_driver_generate_traffic.py /opt/antithes
 # Copying additional resources into a resources folder
 COPY ./python-generate-traffic/resources/helper.py /opt/antithesis/resources/helper.py
 
+# Copying lease TTL validation driver
+COPY ./python-lease-ttl/eventually_driver_lease_ttl.py /opt/antithesis/python-lease-ttl/eventually_driver_lease_ttl.py
+COPY ./shell-executables/eventually_lease_ttl.sh /opt/antithesis/test/v1/main/eventually_lease_ttl.sh
+
+# Copying watch consistency anytime driver
+COPY ./python-watch-consistency/anytime_driver_watch_consistency.py /opt/antithesis/python-watch-consistency/anytime_driver_watch_consistency.py
+COPY ./shell-executables/anytime_watch_consistency.sh /opt/antithesis/test/v1/main/anytime_watch_consistency.sh
+
 
 # GO:
 
