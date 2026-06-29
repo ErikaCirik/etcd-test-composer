@@ -1,0 +1,12 @@
+FROM docker.io/ubuntu:latest
+
+RUN apt-get update -y && apt-get install -y pip python3 python3-etcd3 python3-numpy python3-protobuf python3-filelock
+RUN pip install antithesis cffi --break-system-packages
+
+COPY ./entrypoint/entrypoint.py /entrypoint.py
+COPY ./python-generate-traffic/parallel_driver_generate_traffic.py /opt/antithesis/test/v1/main/parallel_driver_generate_traffic.py
+COPY ./python-generate-traffic/resources/helper.py /opt/antithesis/resources/helper.py
+COPY ./python-lease-ttl/eventually_driver_lease_ttl.py /opt/antithesis/python-lease-ttl/eventually_driver_lease_ttl.py
+COPY ./shell-executables/eventually_lease_ttl.sh /opt/antithesis/test/v1/main/eventually_lease_ttl.sh
+COPY ./python-watch-consistency/anytime_driver_watch_consistency.py /opt/antithesis/python-watch-consistency/anytime_driver_watch_consistency.py
+COPY ./shell-executables/anytime_watch_consistency.sh /opt/antithesis/test/v1/main/anytime_watch_consistency.sh
